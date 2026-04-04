@@ -26,7 +26,7 @@ def scramble_sequence(string_item):
 
 def generate_sequence():
     password_list = list()
-    password_list.append(alphabet[number_generator(len(alphabet))].upper())                                         #Include at least 1 uppercase letter
+    password_list.append(secrets.choice(alphabet).upper())                                         #Include at least 1 uppercase letter
     password_list.append(alphabet[number_generator(len(alphabet))].lower())                                         #Include at least 1 lowercase letter
     password_list.append(number_generator(10))                                                                      #Include at least 1 single digit integer
     password_list.append(symbols[number_generator(len(symbols))])                                                   #Include 1 symbol                                                        
