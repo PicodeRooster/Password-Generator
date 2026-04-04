@@ -29,7 +29,7 @@ def generate_sequence():
     password_list.append(secrets.choice(alphabet).upper())                                         #Include at least 1 uppercase letter
     password_list.append(secrets.choice(alphabet).lower())                                         #Include at least 1 lowercase letter
     password_list.append(str(number_generator(10)))                                                #Include at least 1 single digit integer
-    password_list.append(secrets.choice(symbols)                                                   #Include 1 symbol                                                        
+    password_list.append(secrets.choice(symbols))                                                  #Include 1 symbol                                                        
 
     while len(password_list) < 12:
         token = number_generator(2)
