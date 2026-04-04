@@ -13,13 +13,12 @@ I wanted to include the minimum requirement of dependencies to run an efficient 
 **pyperclip** — Third-party library/module. A single-module package for clipboard copy/paste. While removing it would reduce load time by roughly one second, that gain is immediately offset by the user having to manually copy the generated password, which takes longer than one second on average. In other words, the performance improvement comes at the cost of usability, making the tradeoff not worth it.
 
 ## Global Variables ##
-`alphabet = list(string.ascii_letters)` 
+
+1. `alphabet = list(string.ascii_letters)` 
 A list containing the entire English library in both lowercase and uppercase characters. Allows the use of referencing the entire alphabet accross any point in the script.
 
-`symbols = ["!", "@", "#", "$", "%", "&", "*", "?", "~", "/"]`
-
+2. `symbols = ["!", "@", "#", "$", "%", "&", "*", "?", "~", "/"]`
 A list containing specic symbols that are easy to type and do not complicate the readability of the password. Since the `string` module was imported, it's important to mention that a similar effect can be achieved with `string.symbols` to create a list of ALL available symbols in the English language, similar to how the `alphabet` variable was created. I still opted to crete my own list of symbols as I did not want to include certain ones like commas, colons or semi-colons. In addition to being more difficult to read, these characters are not allowed to be used in many password input fields. Creating a custom list of symbols allows for easier control of the characters in the password sequence.
 
-`password = generate_sequence()`
-
+3. `password = generate_sequence()`
 Final output variable to store the generated password.
