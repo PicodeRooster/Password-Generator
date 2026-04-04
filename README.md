@@ -1,5 +1,5 @@
 # Password-Generator #
-A Python script that generates a strong password sequence following a custom set of rules and remaining compliant with most industries' password policies. It generates a 12 character password that includes at least one uppercase letter, one lowercase letter, one number, and only a single symbol from a specific set. The goal was to create a password generator that follows personal preferences and is still cryptographically secure. Its purpose is to quickly generate secure passwords for user's accounts in an enterprise setting. 
+A Python script that generates a strong password sequence following a custom set of rules and remaining compliant with most industries' password policies. It generates a 12 character password that includes at least one uppercase letter, one lowercase letter, one number, and only a single symbol from a specific set. The goal was to create a password generator that follows personal preferences and is still cryptographically secure. It was designed to quickly generate secure passwords for user accounts in enterprise settings. 
 
 ## Modules ##
 I wanted to include the minimum requirement of dependencies to run an efficient script of this type.
