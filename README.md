@@ -34,3 +34,12 @@ A utility function using the re module to find consecutive sequences of numbers 
 A utility function that takes a single string parameter and returns a randomly scrambled version of the input string. Used to shuffle the characters of the working password to improve its strength. It immediately converts the string to a list, then returns the scrambled sequence as a string. While the string→list→string conversion is admittedly roundabout, restricting the parameter to a string is a design choice for consistency with the rest of the pipeline, as the working password sequence must be passed to `find_consecutives()` as a string. Since strings in Python are immutable, converting to a list is necessary to assign each character an index and select a new position for it in the scrambled sequence. 
 
 `generate_sequence()`
+The main generation function that builds and returns a complete password string. It takes no parameters, calling the other utility functions internally to construct the final result.
+It begins by guaranteeing the four character class requirements are met — at least one uppercase letter, one lowercase letter, one digit, and one symbol — by appending one of each directly to the working list. It then fills the remaining slots up to a minimum length of 12 characters by randomly selecting either a letter or a digit on each iteration using a 2-token match statement.
+
+Once the initial sequence is assembled, it is joined into a string and passed to `scramble_sequence()` to randomize character positions. The result is then checked by `find_consecutives()`, and if a consecutive sequence is detected, the original unscrambled string is re-scrambled in a loop until a clean result is produced. Note that `sequence_one` is preserved across iterations rather than re-generating the base password each time, so only the shuffling is repeated, not the character selection.
+
+The finished password is returned as a string and handled by the caller — in the current script, it is copied to the clipboard via pyperclip and printed to the console.
+
+## Output ##
+Once `generate_sequence()` returns the finished password, it is stored in the `password` variable and handled in two final steps. First, `password` is copied directly to the clipboard using `pyperclip.copy()`, making it ready to paste without any manual selection. Then it is printed to the console as a confirmation, so the user can verify the result. The print statement is the only user-facing output in the script.
