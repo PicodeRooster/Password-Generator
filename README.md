@@ -17,3 +17,7 @@ I wanted to include the minimum requirement of dependencies to run an efficient 
 A list containing the entire English library in both lowercase and uppercase characters. Allows the use of referencing the entire alphabet accross any point in the script.
 
 `symbols = ["!", "@", "#", "$", "%", "&", "*", "?", "~", "/"]`
+A list containing specic symbols that are easy to type and do not complicate the readability of the password. Since the `string` module was imported, it's important to mention that a similar effect can be achieved with `string.symbols` to create a list of ALL available symbols in the English language, similar to how the `alphabet` variable was created. I still opted to crete my own list of symbols as I did not want to include certain ones like commas, colons or semi-colons. In addition to being more difficult to read, these characters are not allowed to be used in many password input fields. Creating a custom list of symbols allows for easier control of the characters in the password sequence.
+
+`password = generate_sequence()`
+Final output variable to store the generated password.
