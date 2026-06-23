@@ -73,7 +73,7 @@ The password is printed to the terminal and copied to your clipboard automatical
 3. **Scramble** — the pool is shuffled using a cryptographically secure random index pick-and-remove loop (`scramble_sequence`).
 4. **Validate** — if the result contains 3 or more consecutive letters or digits, it is re-scrambled until the check passes (`find_consecutives`).
 
-In the first iteration of the script, I only included 1 symbol, aligning with my own organization's requirements. After multiple tests, however, I noticed it consistently scored one point below maximum on many password strength estimators. Increasing to 2 symbols reliably pushed generated passwords to the highest entropy rating across tested platforms, without meaningfully increasing typing difficulty.
+In the first iteration of the script, I only included 1 symbol, aligning with my own organization's requirements. After multiple tests, however, I noticed it consistently scored one point below maximum on many password strength estimators. Increasing the sequence to require 2 symbols reliably pushed the score to the highest entropy rating across platforms, without meaningfully increasing typing difficulty.
 
 ## Modules
 
