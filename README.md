@@ -1,10 +1,10 @@
 # Password-Generator
 
-A custom Python script that generates a strong password, compliant with CISA's industry security standards while remaining simple to type. The purpose is to generates strong password sequences without sacrificing ease-of-use for end-users. It is designed to run for enterprise environments, or for personal use to quickly generate passwords on a terminal.
+A custom Python script that generates a strong password, compliant with CISA's industry security standards while remaining simple to type. The purpose is to generate strong password sequences without sacrificing ease-of-use for end-users. It is designed to run for enterprise environments, or for personal use to quickly generate passwords on a terminal.
 
 ## Purpose
 
-I built this script for my own help desk environment. One of our most frequent request involves password resets. In certain cases, we need to manually create one ourselves and share it with the user having access issues. At my company, we have standard CISA compliant password policies, but in addition, we have certain preferences for how a password should be generated. They need to be compliant, but simple enough to type for users and prevent further technical difficulties.
+I built this script for my own help desk environment. One of our most frequent requests involves password resets. In certain cases, we need to manually create one ourselves and share it with the user having access issues. At my company, we have standard CISA compliant password policies, but in addition, we have certain preferences for how a password should be generated. They need to be compliant, but simple enough to type for users and prevent further technical difficulties.
 
 My organization's password policy establishes:
 
@@ -19,9 +19,9 @@ While there are both online and offline tools that generate passwords, as a cybe
 
 It was built around two principles that directly support each other: minimal dependencies and offline availability. All modules used are part of the Python Standard Library. I wanted it to be as efficient and lightweight as possible, while maintaining a strong security posture. All you need to run this script is to have the latest version of Python and install the required modules.
 
-Fewer dependencies means little to no network calls; this script's online requirement is *zero*.The first response when a system is suspected of being infected with malware is to remove the machine from the network. For this reason, I've made offline capability a personal design standard. Any tool I build that does not require network connection, **should not** touch the network.
+Fewer dependencies mean little to no network calls; this script's online requirement is *zero*. The first response when a system is suspected of being infected with malware is to remove the machine from the network. For this reason, I've made offline capability a personal design standard. Any tool I build that does not require network connection, **should not** touch the network.
 
-The last design principal is to facilitate the end-user's effort. The allowed symbol set is intentionally limited. Rather than drawing from every available special character, the script uses a curated list of 10 symbols that are visually distinct and easy to locate on a standard keyboard. This accounts for users who may have vision impairments or dyslexia, and avoids character combinations that are difficult to distinguish (e.g., `I|}`). Password length is also fixed at exactly 12 characters for the same reason: long enough to meet compliance and resist brute force, short enough that a non-technical user can type it without frustration.
+The last design principle is to facilitate the end-user's effort. The allowed symbol set is intentionally limited. Rather than drawing from every available special character, the script uses a curated list of 10 symbols that are visually distinct and easy to locate on a standard keyboard. This accounts for users who may have vision impairments or dyslexia, and avoids character combinations that are difficult to distinguish (e.g., `I|}`). Password length is also fixed at exactly 12 characters for the same reason: long enough to meet compliance and resist brute force, short enough that a non-technical user can type it without frustration.
 
 The result is a security analyst's dream tool: compliant, offline, lightweight and designed with the end-user in mind. As long as you have the latest Python version and required modules installed, the script is run as soon as the file is on your machine.
 
