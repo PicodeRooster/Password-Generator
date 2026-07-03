@@ -1,7 +1,6 @@
 import string
 import secrets
 import re
-import pyperclip
 
 alphabet = list(string.ascii_letters)
 symbols = ["!", "@", "#", "$", "%", "&", "*", "?", "~", "/"]
@@ -51,5 +50,4 @@ def generate_sequence():
     return sequence_two
 
 password = generate_sequence()
-pyperclip.copy(password)
-print(f"Password copied to clipboard: {password}")
+print(f"Generated password: {password}")
