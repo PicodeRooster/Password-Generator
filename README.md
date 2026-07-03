@@ -41,17 +41,6 @@ Every generated password is guaranteed to have:
 ## Requirements
 
 - Python 3.10+
-- [`pyperclip`](https://pypi.org/project/pyperclip/) — install via pip:
-  ```
-  pip install pyperclip
-  ```
-- **Linux only:** `pyperclip` requires a clipboard backend. Install one of:
-  ```
-  sudo apt install xclip
-  # or
-  sudo apt install xsel
-  ```
-  macOS and Windows have native clipboard support and need no extra step.
 
 ## Usage
 ```
@@ -102,6 +91,10 @@ A curated list of 10 common symbols accepted by most password policies. Selectin
 `scramble_sequence(string_item)` — Takes a string and returns a shuffled version of it. Builds the result by repeatedly picking a random index from the remaining characters and appending it — equivalent to a secure Fisher-Yates shuffle.
 
 `generate_sequence()` — Orchestrates the full password generation pipeline: seeds the guaranteed character pool, pads it to 12 characters, scrambles it, and re-scrambles until `find_consecutives` returns `False`. Returns the final password string.
+
+## Logs
+
+07-02-2026: Removed the `pyperclip` module and function to make script fully offline capable, the only dependency is Python installed.
 
 ## License
 
