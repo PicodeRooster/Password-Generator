@@ -94,16 +94,14 @@ A curated list of 10 common symbols accepted by most password policies. Selectin
 
 `number_generator(x)` — Returns a cryptographically secure random integer in the range `[0, x)` using `secrets.randbelow`. Used as the central source of randomness throughout the script.
 
-`find_consecutives(s)` — Takes a string and returns `True` if it contains 3 or more consecutive letters (`[A-Za-z]{3,}`) or 3 or more consecutive digits (`\d{3,}`). Used to validate a generated password before returning it.
+`generate_sequence()` — Orchestrates the full password generation pipeline: seeds the guaranteed character pool, pads it to 12 characters, scrambles it and returns the final password string.
 
-`scramble_sequence(string_item)` — Takes a string and returns a shuffled version of it. Builds the result by repeatedly picking a random index from the remaining characters and appending it — equivalent to a secure Fisher-Yates shuffle.
-
-`generate_sequence()` — Orchestrates the full password generation pipeline: seeds the guaranteed character pool, pads it to 12 characters, scrambles it, and re-scrambles until `find_consecutives` returns `False`. Returns the final password string.
+`patch_sequence()` — Patches sequenced numbers and letters, swapping their place one for the other.
 
 ## Logs
 
-07-02-2026: Removed the `pyperclip` module and function to make script fully offline capable, the only dependency is Python installed.
-07-22-2026: Split `pyperclip` and no dependencies versions. Refactored versions to be nearly identical.
+ - **07-02-2026:** Removed the `pyperclip` module and function to make script fully offline capable, the only dependency is Python installed.
+ - **07-22-2026:** Split `pyperclip` and no dependencies versions. Refactored versions to be nearly identical.
 
 ## License
 
