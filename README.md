@@ -103,6 +103,7 @@ A curated list of 10 common symbols accepted by most password policies. Selectin
 ## Logs
 
 07-02-2026: Removed the `pyperclip` module and function to make script fully offline capable, the only dependency is Python installed.
+07-22-2026: Split `pyperclip` and no dependencies versions. Refactored versions to be nearly identical.
 
 ## License
 
