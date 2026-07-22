@@ -98,6 +98,43 @@ A curated list of 10 common symbols accepted by most password policies. Selectin
 
 `patch_sequence()` — Patches sequenced numbers and letters, swapping their place one for the other.
 
+# Password Generator
+
+A script that generates a cryptographically secure 12-character password, copies it to the clipboard, and prints it.
+
+## How it works
+
+### Character pools
+- `alphabet`: all uppercase and lowercase ASCII letters.
+- `symbols`: a fixed set of 10 special characters (`! @ # $ % & * ? ~ /`).
+
+### `number_generator(x)`
+Returns a cryptographically secure random integer in `[0, x)` using `secrets.randbelow`, instead of the non-secure `random` module.
+
+### `find_consecutives(s)`
+Returns `True` if the string contains 3 or more consecutive letters, or 3 or more consecutive digits, in a row. Used as a quality check to reject passwords with predictable runs.
+
+### `scramble_sequence(string_item)`
+Manually shuffles a string using a Fisher-Yates-style approach: repeatedly picks a random remaining character and moves it into the output, until none are left. Equivalent to `random.shuffle`, but built on `secrets` for cryptographic security.
+
+### `generate_sequence()`
+Builds the final password in three stages:
+
+1. **Guarantee character variety** — seeds the list with 1 uppercase letter, 1 lowercase letter, 1 digit, and 2 symbols (5 required characters).
+2. **Fill to 12 characters** — a loop flips a random coin each iteration to add either a random letter or a random digit until the list has 12 elements.
+3. **Scramble and validate** — joins the list into a string, shuffles it with `scramble_sequence`, and re-shuffles (from the same unscrambled character set) until `find_consecutives` returns `False`, guaranteeing no runs of 3+ letters or 3+ digits.
+
+### Script execution
+Calling `generate_sequence()` produces the password, which is copied to the clipboard via `pyperclip.copy()` and printed to the console.
+
+## Notes
+- `password_list` contains a mix of `str` and `int` values (letters vs. digits), which is why `"".join(map(str, password_list))` is needed to build the final string.
+- The password is printed to the console in plaintext after being copied — worth considering if console output could be logged or exposed elsewhere.
+
+
+
+
+
 ## Logs
 
  - **07-02-2026:** Removed the `pyperclip` module and function to make script fully offline capable, the only dependency is Python installed.
