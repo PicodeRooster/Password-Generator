@@ -80,8 +80,6 @@ In the first iteration of the script, I only included 1 symbol, aligning with my
 
 **secrets** — For generating cryptographically secure random values. Python's official documentation recommends using this module for anything involving security credentials, as opposed to the simpler but non-cryptographic `random` library. `secrets` provides the same functionality as `random` but is significantly more secure.
 
-**re** — For regular expression matching. Used in `find_consecutives` to detect runs of 3 or more consecutive letters or digits. The pattern `r'[A-Za-z]{3,}|\d{3,}'` covers both cases in a single expression, keeping the check to a minimal footprint.
-
 **pyperclip** — Third-party library for clipboard copy/paste. While removing it would reduce load time slightly, that gain is offset by the user having to manually copy the generated password.
 
 ## Global Variables
