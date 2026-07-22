@@ -23,19 +23,13 @@ Fewer dependencies mean little to no network calls; this script's online require
 **Pyperclip Version**
 The only difference in this version is three lines of code: the `pyperclip` import statement, the pyperclip function, and the print statement varies in wording slightly. This version sacrifices the zero dependencies philosophy for efficiency. It copies the generated password to the clipboard directly. If you install a single package, *then* this script becomes fully offline capable, it's just doesn't meet the *fully* offline criteria because of that one module installation. Other than that, the script functions exactly the same as the No Dependencies Version. 
 
+To install pyperclip:
+
+```
+pip install pyperclip
+```
  
 ## Password Policy
-
-My organization's password policy establishes:
-
-- Minimum **12 characters**
-- At least **1 uppercase** letter
-- At least **1 lowercase** letter
-- At least **1 digit** (0–9)
-- At least **1 symbol**
-- No **3 or more consecutive** letters or digits of the same type
-
-I took this same model with one caveat:
 
 Every generated password is guaranteed to have:
 
@@ -43,10 +37,11 @@ Every generated password is guaranteed to have:
 - At least **1 uppercase** letter
 - At least **1 lowercase** letter
 - At least **1 digit** (0–9)
-- At least **2 symbols** (`!`, `@`, `#`, `$`, `%`, `&`, `*`, `?`, `~`, `/`)
+- At least **2 symbols** from this list: `!`, `@`, `#`, `$`, `%`, `&`, `*`, `?`, `~`, `/`
 - **No 3 or more consecutive** letters or digits of the same type
 - Automatically **copied to clipboard** on generation
 
+**Dev Note:** Most enterprise password policies require only 1 symbol, and this was my original design as well. After multiple tests, I realized an additional symbol made password strength scores the strongest on most scales. Therefore, my own policy is to include 2 symbols out of the set of characters listed. 
 
 ## Requirements
 
@@ -62,45 +57,6 @@ python password_generator.py
 ```
 python3 password_generator.py
 ```
-
-The password is printed to the terminal and copied to your clipboard automatically.
-
-## How It Works
-
-1. **Seed guaranteed characters** — a pool is built with at least 1 uppercase letter, 1 lowercase letter, 1 digit, and 2 symbols to satisfy the minimum policy requirements.
-2. **Pad to 12 characters** — the pool is filled with random letters or digits until it reaches 12 characters.
-3. **Scramble** — the pool is shuffled using a cryptographically secure random index pick-and-remove loop (`scramble_sequence`).
-4. **Validate** — if the result contains 3 or more consecutive letters or digits, it is re-scrambled until the check passes (`find_consecutives`).
-
-In the first iteration of the script, I only included 1 symbol, aligning with my own organization's requirements. After multiple tests, however, I noticed it consistently scored one point below maximum on many password strength estimators. Increasing the sequence to require 2 symbols reliably pushed the score to the highest entropy rating across platforms, without meaningfully affecting typing difficulty.
-
-## Modules
-
-**string** — Provides string constants and helpers. With `string.ascii_letters` the entire English alphabet is mapped in both uppercase and lowercase into a single list, making random letter selection with controlled case sensitivity straightforward.
-
-**secrets** — For generating cryptographically secure random values. Python's official documentation recommends using this module for anything involving security credentials, as opposed to the simpler but non-cryptographic `random` library. `secrets` provides the same functionality as `random` but is significantly more secure.
-
-**pyperclip** — Third-party library for clipboard copy/paste. While removing it would reduce load time slightly, that gain is offset by the user having to manually copy the generated password.
-
-## Global Variables
-
-`alphabet = list(string.ascii_letters)`
-A list containing the entire English alphabet in both lowercase and uppercase characters. Used as the source pool for all letter-based selections throughout the script.
-
-`symbols = ["!", "@", "#", "$", "%", "&", "*", "?", "~", "/"]`
-A curated list of 10 common symbols accepted by most password policies. Selecting from an explicit list avoids including symbols that some services reject (e.g. `<`, `>`, spaces).
-
-## Functions
-
-`number_generator(x)` — Returns a cryptographically secure random integer in the range `[0, x)` using `secrets.randbelow`. Used as the central source of randomness throughout the script.
-
-`generate_sequence()` — Orchestrates the full password generation pipeline: seeds the guaranteed character pool, pads it to 12 characters, scrambles it and returns the final password string.
-
-`patch_sequence()` — Patches sequenced numbers and letters, swapping their place one for the other.
-
-# Password Generator
-
-A script that generates a cryptographically secure 12-character password, copies it to the clipboard, and prints it.
 
 ## How it works
 
@@ -130,10 +86,6 @@ Calling `generate_sequence()` produces the password, which is copied to the clip
 ## Notes
 - `password_list` contains a mix of `str` and `int` values (letters vs. digits), which is why `"".join(map(str, password_list))` is needed to build the final string.
 - The password is printed to the console in plaintext after being copied — worth considering if console output could be logged or exposed elsewhere.
-
-
-
-
 
 ## Logs
 
