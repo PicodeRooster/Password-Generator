@@ -1,9 +1,7 @@
-import string
-import secrets
 import pyperclip
-import string
-import secrets
 import re
+import secrets
+import string
 
 alphabet = list(string.ascii_letters)
 symbols = ["!", "@", "#", "$", "%", "&", "*", "?", "~", "/"]
