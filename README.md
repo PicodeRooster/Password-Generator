@@ -1,10 +1,30 @@
 # Password-Generator
 
-A custom Python script that generates a strong password, compliant with CISA's industry security standards while remaining simple to type. The purpose is to generate strong password sequences without sacrificing ease-of-use for end-users. It is designed to run for enterprise environments, or for personal use to quickly generate passwords on a terminal.
+A custom Python script that generates a strong password, compliant with CISA's industry security standards while remaining simple to type. The purpose is to generate strong password sequences without sacrificing ease-of-use for end-users. It is designed to run for enterprise environments, or for personal use to quickly generate them on a terminal.
 
 ## Purpose
 
-I built this script for my own help desk environment. One of our most frequent requests involves password resets. In certain cases, we need to manually create one ourselves and share it with the user having access issues. At my company, we have standard CISA compliant password policies, but in addition, we have certain preferences for how a password should be generated. They need to be compliant, but simple enough to type for users and prevent further technical difficulties.
+I built this script for my own Help Desk environment. One of our most frequent requests involves password resets. In certain cases, we need to manually create one ourselves and share it with the user having access issues. At my company, we have standard CISA compliant password policies, but in addition, we have certain preferences for how a password should be generated. They need to meet policy while having simple-enough characters for users to type. Generating a password with these specifications prevents further technical difficulties. The options are to use online password generators, but I have issues with these. My #1 problem is that it is <ins>online</ins>. When a breach happens on a computer, the first thing you need to do is take that computer offline. This is a philosophy I follow with all my scripts when possible, so I wanted to create my own password generator that follows company policy and works completely offline. Creating a tool that runs on a terminal was the natural design choice. 
+
+The last design principle is to facilitate the end-user's effort. The allowed symbol set is intentionally limited. Rather than drawing from every available special character, the script uses a curated list of 10 symbols that are visually distinct and easy to locate on a standard keyboard. This accounts for users who may have vision impairments or dyslexia, and avoids character combinations that are difficult to distinguish (e.g., `I|}`). Password length is also fixed at exactly 12 characters for the same reason: long enough to meet compliance and resist brute force, short enough that a non-technical user can type it without frustration.
+
+The result is a security analyst's dream tool: compliant, offline, lightweight and designed with the end-user in mind.
+
+---
+
+## Description
+
+While there are both online and offline tools that generate passwords, as a cybersecurity enthusiast, this felt like the perfect project to simultaneously train my Python coding and security awareness skills. In addition to wanting to practice Python, this was the natural language option for this kind of script. I needed something that could work cross-platform on any terminal – no GUI involved. Python's large collection of built-in modules made it the perfect tool for a script of this caliber. It was built around two principles that directly support each other: minimal dependencies and offline availability. In the end, I created two nearly identical scripts with the only difference being one that includes a `pyperclip` function to copy the password to the clipboard.
+
+**No Dependencies Version**
+All modules used in this version are part of the Python Standard Library. I wanted it to be as efficient and lightweight as possible, while maintaining a strong security posture. All you need to run this script is to have the latest version of Python. No `pip install` needed.
+Fewer dependencies mean little to no network calls; this script's online requirement is *zero*. Any tool I build that does not require network connection, **should not** touch the network.
+
+**Pyperclip Version**
+The only difference in this version is three lines of code: the `pyperclip` import statement, the pyperclip function, and the print statement varies in wording slightly. This version sacrifices the zero dependencies philosophy for efficiency. It copies the generated password to the clipboard directly. If you install a single package, *then* this script becomes fully offline capable, it's just doesn't meet the *fully* offline criteria because of that one module installation. Other than that, the script functions exactly the same as the No Dependencies Version. 
+
+ 
+## Password Policy
 
 My organization's password policy establishes:
 
@@ -15,17 +35,7 @@ My organization's password policy establishes:
 - At least **1 symbol**
 - No **3 or more consecutive** letters or digits of the same type
 
-While there are both online and offline tools that generate passwords, as a cybersecurity enthusiast, this felt like the perfect project to simultaneously train my Python coding and security awareness skills. In addition to wanting to practice Python, this was the natural language option for this kind of script. I needed something that could work cross-platform on any terminal – no GUI involved. Python's large collection of built-in modules made it the perfect tool for a script of this caliber.
-
-It was built around two principles that directly support each other: minimal dependencies and offline availability. All modules used are part of the Python Standard Library. I wanted it to be as efficient and lightweight as possible, while maintaining a strong security posture. All you need to run this script is to have the latest version of Python and install the required modules.
-
-Fewer dependencies mean little to no network calls; this script's online requirement is *zero*. The first response when a system is suspected of being infected with malware is to remove the machine from the network. For this reason, I've made offline capability a personal design standard. Any tool I build that does not require network connection, **should not** touch the network.
-
-The last design principle is to facilitate the end-user's effort. The allowed symbol set is intentionally limited. Rather than drawing from every available special character, the script uses a curated list of 10 symbols that are visually distinct and easy to locate on a standard keyboard. This accounts for users who may have vision impairments or dyslexia, and avoids character combinations that are difficult to distinguish (e.g., `I|}`). Password length is also fixed at exactly 12 characters for the same reason: long enough to meet compliance and resist brute force, short enough that a non-technical user can type it without frustration.
-
-The result is a security analyst's dream tool: compliant, offline, lightweight and designed with the end-user in mind. As long as you have the latest Python version and required modules installed, the script is run as soon as the file is on your machine.
-
-## Password Policy
+I took this same model with one caveat:
 
 Every generated password is guaranteed to have:
 
@@ -72,7 +82,7 @@ In the first iteration of the script, I only included 1 symbol, aligning with my
 
 **re** — For regular expression matching. Used in `find_consecutives` to detect runs of 3 or more consecutive letters or digits. The pattern `r'[A-Za-z]{3,}|\d{3,}'` covers both cases in a single expression, keeping the check to a minimal footprint.
 
-**pyperclip** — Third-party library for clipboard copy/paste. While removing it would reduce load time slightly, that gain is offset by the user having to manually copy the generated password — making the tradeoff not worth it.
+**pyperclip** — Third-party library for clipboard copy/paste. While removing it would reduce load time slightly, that gain is offset by the user having to manually copy the generated password.
 
 ## Global Variables
 
