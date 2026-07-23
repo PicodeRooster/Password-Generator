@@ -49,11 +49,6 @@ Every generated password is guaranteed to have:
 - Python 3.10+
 
 ## Usage
-```
-python password_generator.py
-```
-
----OR---
 
 ```
 python3 password_generator.py
